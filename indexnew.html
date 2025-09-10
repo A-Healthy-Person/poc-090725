@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sante Certa - Your Global Health Data Vault</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <!-- Navbar -->
+  <nav class="navbar">
+    <div class="nav-content">
+      <div class="logo">🏥 Sante Certa</div>
+      <div class="nav-links">
+        <a href="#features" class="nav-link" data-nav>Features</a>
+        <a href="#how-it-works" class="nav-link" data-nav>How It Works</a>
+        <a href="#privacy" class="nav-link" data-nav>Privacy</a>
+        <a href="#contact" class="nav-link" data-nav>Contact</a>
+        <a href="#" class="btn-demo" id="start-demo">Start Demo</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Landing -->
+  <div id="landing-page">
+    <section class="hero">
+      <div class="container">
+        <h1>Your Global Health Data Vault</h1>
+        <p>Consolidate decades of health data into one secure place you control.</p>
+        <div class="hero-buttons">
+          <a href="#how-it-works" class="btn btn-secondary" data-nav>1. How It Works</a>
+          <a href="#" class="btn" id="setup-vault">2. Set Up Your Vault</a>
+          <a href="#contact" class="btn btn-secondary" data-nav>3. Request a Call</a>
+          <a href="#privacy" class="btn btn-secondary" data-nav>4. Privacy & Terms</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="features">
+      <div class="container">
+        <h2>Why Choose Sante Certa?</h2>
+        <div class="features-grid">
+          <div class="feature-card"><div class="feature-emoji">🔐</div><h3>Zero-Knowledge Encryption</h3><p>Keys you control—your data stays private.</p></div>
+          <div class="feature-card"><div class="feature-emoji">🇫🇷</div><h3>Flexible Global Hosting</h3><p>France by default, US/EU/custom on request.</p></div>
+          <div class="feature-card"><div class="feature-emoji">🌍</div><h3>Connect to 50,000+ Systems</h3><p>Think online banking, but for health records.</p></div>
+          <div class="feature-card"><div class="feature-emoji">🤖</div><h3>Honest AI Organization</h3><p>Organize by clinical concepts, not file type.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="how-it-works">
+      <div class="container">
+        <h2>How It Works</h2>
+        <div class="features-grid">
+          <div class="feature-card"><div class="step-number">1</div><h3>Choose Hosting</h3><p>France / US / EU / Bespoke.</p></div>
+          <div class="feature-card"><div class="step-number">2</div><h3>Connect & Import</h3><p>Patient portals, PDFs, images, DICOM.</p></div>
+          <div class="feature-card"><div class="step-number">3</div><h3>Organize</h3><p>Conditions, meds, labs, imaging, more.</p></div>
+          <div class="feature-card"><div class="step-number">4</div><h3>Control Access</h3><p>Share temporarily with full audit trail.</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="features" id="privacy">
+      <div class="container">
+        <h2>Your Choice, Your Control</h2>
+        <p>GDPR native, HIPAA compatible, zero-knowledge by design.</p>
+      </div>
+    </section>
+
+    <footer class="features" id="contact">
+      <div class="container">
+        <h2>Contact</h2>
+        <p>Email: hello@sante-certa.com</p>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Workflow -->
+  <div id="workflow-demo" class="workflow-container">
+    <div class="container">
+      <div class="workflow-nav">
+        <div class="logo">🏥 Sante Certa Setup</div>
+        <div class="workflow-steps">
+          <div class="workflow-step active" data-step="1">1. Sovereignty</div>
+          <div class="workflow-step" data-step="2">2. Import</div>
+          <div class="workflow-step" data-step="3">3. Organize</div>
+          <div class="workflow-step" data-step="4">4. Access</div>
+        </div>
+        <button class="back-button" id="back-btn">← Back</button>
+      </div>
+
+      <!-- Step 1: Data Sovereignty -->
+      <div class="step-container active" id="step-1">
+        <h2 class="mb-8">Choose What Works for You</h2>
+        <p class="muted">Pick your hosting region.</p>
+        <div class="choice-grid">
+          <div class="choice-card" data-choice="ovh">🇫🇷 France (OVH Cloud)</div>
+          <div class="choice-card" data-choice="us">🇺🇸 United States (AWS)</div>
+          <div class="choice-card" data-choice="eu">🇪🇺 EU Multi-Cloud</div>
+          <div class="choice-card" data-choice="bespoke">⚙️ Bespoke</div>
+        </div>
+        <div class="center">
+          <button class="btn" id="continue-1">Continue Setup →</button>
+        </div>
+      </div>
+
+      <!-- AWS Setup (US) -->
+      <div class="step-container" id="aws-setup">
+        <h2>🇺🇸 Setting Up Your Secure AWS Vault</h2>
+        <div class="callout">
+          <strong>Security Architecture</strong>
+          <ul>
+            <li>AWS KMS with Customer Managed Keys</li>
+            <li>HIPAA-ready S3 (versioning, server-side encryption, access logs)</li>
+            <li>CloudTrail audit logging</li>
+          </ul>
+        </div>
+        <label for="aws-email"><strong>Your AWS Account Email</strong></label>
+        <input id="aws-email" type="email" placeholder="your.email@domain.com" class="input" />
+        <div>
+          <label><strong>Choose Your MFA Method</strong></label>
+          <div class="choice-grid grid-tight">
+            <div class="mfa-option" data-mfa="authenticator">📱 Authenticator App<br/><small>Google Auth, Authy</small></div>
+            <div class="mfa-option" data-mfa="yubikey">🔑 Hardware Key<br/><small>YubiKey, etc.</small></div>
+            <div class="mfa-option" data-mfa="sms">💬 SMS Backup<br/><small>Less secure</small></div>
+          </div>
+        </div>
+        <div class="warning">🛡️ You own the AWS account, keys, and data. We cannot access your vault without explicit permission.</div>
+        <button class="btn wide" id="proceed-aws">Continue to create vault - AWS US selected →</button>
+      </div>
+
+      <!-- Step 2: Vault Login -->
+      <div class="step-container" id="step-2">
+        <h2>🔐 Access Your Vault</h2>
+        <div class="card narrow">
+          <label>Email</label>
+          <input id="vault-login-email" type="email" placeholder="your.email@domain.com" class="input" />
+          <label>Password</label>
+          <input id="vault-login-password" type="password" placeholder="••••••••" class="input" />
+          <label>MFA Code</label>
+          <input id="vault-login-mfa" type="text" placeholder="123456" class="input center-text mfa" />
+          <button class="btn wide" id="open-vault">🔓 Access My Vault</button>
+        </div>
+      </div>
+
+      <!-- Vault Workspace -->
+      <div class="step-container" id="vault">
+        <div class="vault-wrap">
+          <aside class="vault-side">
+            <h3>📚 Knowledge Tree</h3>
+            <p class="muted small">Browse by concept</p>
+            <div class="tree">
+              <button class="back-button" data-filter="All">All Items</button>
+              <button class="back-button" data-filter="Conditions">Conditions</button>
+              <button class="back-button" data-filter="Medications">Medications</button>
+              <button class="back-button" data-filter="Labs">Labs</button>
+              <button class="back-button" data-filter="Imaging">Imaging</button>
+              <button class="back-button" data-filter="Procedures">Procedures</button>
+              <button class="back-button" data-filter="Visits">Visits</button>
+              <button class="back-button" data-filter="Admin">Admin</button>
+            </div>
+          </aside>
+
+          <main class="vault-main">
+            <div class="tabs">
+              <div class="tab active" data-panel="upload">Upload</div>
+              <div class="tab" data-panel="dicom">Images / DICOM</div>
+              <div class="tab" data-panel="fasten">Connect (FastenHealth)</div>
+              <div class="tab" data-panel="notes">Notes & Tags</div>
+              <div class="tab" data-panel="library">Library</div>
+            </div>
+
+            <!-- Upload Panel -->
+            <section id="panel-upload" class="panel active">
+              <h3>Upload Documents</h3>
+              <p>PDF, Word, images. (Demo-only; files stay in your browser memory.)</p>
+              <input id="file-input" type="file" multiple accept=".pdf,.doc,.docx,.png,.jpg,.jpeg" />
+              <div class="mt-10">
+                <label>Add tags (comma separated): </label>
+                <input id="file-tags" type="text" placeholder="e.g. Labs, Diabetes, 2023" class="input inline w-60" />
+                <button class="btn" id="add-files">Add to Vault</button>
+              </div>
+            </section>
+
+            <!-- DICOM Panel -->
+            <section id="panel-dicom" class="panel">
+              <h3>Medical Images / DICOM</h3>
+              <p>Upload .dcm files (or zipped studies). This demo lists files and tags them as <em>Imaging</em>. Rendering requires a viewer in production (e.g., dicomweb + cornerstone.js).</p>
+              <input id="dicom-input" type="file" multiple accept=".dcm,.zip" />
+              <button class="btn" id="add-dicom">Add DICOM</button>
+            </section>
+
+            <!-- FastenHealth Panel (Mock) -->
+            <section id="panel-fasten" class="panel">
+              <h3>Connect US Health Records (FastenHealth – mock)</h3>
+              <div class="grid-col">
+                <input id="prov-search" placeholder="Search provider (e.g., Kaiser, Johns Hopkins)" class="input" />
+                <button class="btn" id="prov-search-btn">Search Providers</button>
+                <div id="prov-results" class="results-box" style="display:none;"></div>
+              </div>
+            </section>
+
+            <!-- Notes & Tags Panel -->
+            <section id="panel-notes" class="panel">
+              <h3>Notes & Tags</h3>
+              <p>Select a file in Library to add notes and categorize by concept.</p>
+              <div id="notes-area" style="display:none;">
+                <div><strong id="notes-file-name"></strong></div>
+                <label>Concept Category</label>
+                <select id="notes-category" class="input">
+                  <option>Conditions</option>
+                  <option>Medications</option>
+                  <option>Labs</option>
+                  <option>Imaging</option>
+                  <option>Procedures</option>
+                  <option>Visits</option>
+                  <option>Admin</option>
+                </select>
+                <div class="mt-8"><label>Tags</label><input id="notes-tags" placeholder="comma,separated" class="input inline w-60" /></div>
+                <div class="mt-8"><label>Comments</label><br/>
+                  <textarea id="notes-text" rows="4" class="textarea"></textarea>
+                </div>
+                <button class="btn" id="save-notes" style="margin-top:8px;">Save</button>
+              </div>
+            </section>
+
+            <!-- Library Panel -->
+            <section id="panel-library" class="panel">
+              <h3>Vault Library</h3>
+              <div id="library" class="file-list"></div>
+            </section>
+          </main>
+        </div>
+      </div>
+
+      <!-- Step 3 & 4 placeholders -->
+      <div class="step-container" id="step-3"><h2>Step 3: AI Organization</h2><p>Demo of concept-based grouping appears in the Knowledge Tree and Library filters.</p></div>
+      <div class="step-container" id="step-4"><h2>Step 4: Access Control</h2><p>In production: time-limited shares, per-concept permissions, full audit log.</p></div>
+    </div>
+  </div>
+
+  <script src="./app.js"></script>
+</body>
+</html>
