@@ -1,4 +1,1041 @@
-function handleBackButton() {
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sante Certa - Your Global Health Data Vault</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: #efeee7;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .navbar {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 15px 0;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            border-bottom: 1px solid #e8f2a7;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .logo {
+            font-size: 28px;
+            font-weight: 700;
+            background: linear-gradient(45deg, #446547, #a7bc8f);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: #446547;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-link:hover {
+            color: #a7bc8f;
+        }
+
+        .btn-demo {
+            background: linear-gradient(135deg, #446547 0%, #a7bc8f 100%);
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .btn-demo:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(167, 188, 143, 0.3);
+        }
+
+        .hero {
+            background: linear-gradient(135deg, #446547 0%, #6f8a5e 100%);
+            color: white;
+            padding: 120px 0 80px 0;
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: 48px;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+
+        .hero p {
+            font-size: 22px;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #e8f2a7 0%, #a7bc8f 100%);
+            color: #2c3e50;
+            border: none;
+            padding: 14px 20px;
+            border-radius: 30px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            white-space: nowrap;
+            flex: 1;
+            min-width: 140px;
+            max-width: 180px;
+            text-align: center;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 30px rgba(232, 242, 167, 0.4);
+        }
+
+        .btn-secondary {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .features {
+            padding: 80px 0;
+            background: white;
+        }
+
+        .features h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+        }
+
+        .features-subtitle {
+            text-align: center;
+            font-size: 18px;
+            color: #7f8c8d;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 40px;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 40px 30px;
+            border-radius: 20px;
+            background: #f8fcf4;
+            border: 2px solid #e8f2a7;
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            border-color: #a7bc8f;
+            box-shadow: 0 15px 35px rgba(167, 188, 143, 0.15);
+        }
+
+        .feature-icon {
+            font-size: 64px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .feature-title {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #7f8c8d;
+            line-height: 1.7;
+        }
+
+        .how-it-works {
+            padding: 80px 0;
+            background: #efeee7;
+        }
+
+        .how-it-works h2 {
+            text-align: center;
+            font-size: 36px;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 60px;
+        }
+
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+
+        .step-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            border: 1px solid #e8f2a7;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #446547, #a7bc8f);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            font-weight: 700;
+            margin: 0 auto 20px auto;
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 15px;
+        }
+
+        .step-description {
+            color: #7f8c8d;
+            line-height: 1.6;
+        }
+
+        .privacy-first {
+            padding: 80px 0;
+            background: #446547;
+            color: white;
+            text-align: center;
+        }
+
+        .privacy-first h2 {
+            font-size: 36px;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .privacy-badges {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 40px;
+        }
+
+        .privacy-badge {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 20px 30px;
+            border-radius: 15px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .cta-section {
+            padding: 80px 0;
+            background: white;
+            text-align: center;
+        }
+
+        .footer {
+            background: #2c3e50;
+            color: white;
+            padding: 60px 0 20px 0;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-section h3 {
+            color: #a7bc8f;
+            margin-bottom: 20px;
+            font-size: 18px;
+        }
+
+        .footer-section a {
+            color: #bdc3c7;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 10px;
+            transition: color 0.3s ease;
+        }
+
+        .footer-section a:hover {
+            color: #e8f2a7;
+        }
+
+        .footer-bottom {
+            border-top: 1px solid #34495e;
+            padding-top: 20px;
+            text-align: center;
+            color: #95a5a6;
+        }
+
+        .workflow-container {
+            display: none;
+            padding: 40px 0;
+            background: #efeee7;
+            min-height: 100vh;
+        }
+
+        .workflow-container.active {
+            display: block;
+        }
+
+        .workflow-nav {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 15px 30px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        }
+
+        .workflow-steps {
+            display: flex;
+            gap: 20px;
+        }
+
+        .workflow-step {
+            padding: 8px 16px;
+            border-radius: 20px;
+            background: rgba(167, 188, 143, 0.1);
+            color: #446547;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .workflow-step.active {
+            background: #a7bc8f;
+            color: white;
+        }
+
+        .step-container {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+            display: none;
+        }
+
+        .step-container.active {
+            display: block;
+            animation: fadeInUp 0.6s ease;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .choice-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            margin: 30px 0;
+        }
+
+        .choice-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            border: 2px solid #e8f2a7;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .choice-card:hover {
+            border-color: #a7bc8f;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(167, 188, 143, 0.15);
+        }
+
+        .choice-card.selected {
+            border-color: #a7bc8f;
+            background: linear-gradient(135deg, #446547 0%, #6f8a5e 100%);
+            color: white;
+        }
+
+        .card-icon {
+            font-size: 48px;
+            margin-bottom: 15px;
+            display: block;
+        }
+
+        .card-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 10px;
+        }
+
+        .card-description {
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .mfa-option {
+            transition: all 0.3s ease;
+        }
+
+        .mfa-option:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(167, 188, 143, 0.2);
+        }
+
+        .back-button {
+            background: none;
+            border: 1px solid #a7bc8f;
+            color: #446547;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-button:hover {
+            background: #f8fcf4;
+            border-color: #446547;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 36px;
+            }
+            
+            .hero p {
+                font-size: 18px;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+                gap: 12px;
+            }
+            
+            .btn {
+                width: 100%;
+                max-width: 280px;
+                min-width: unset;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Fixed Navigation -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <div class="logo">🏥 Sante Certa</div>
+            <div class="nav-links">
+                <a href="#features" class="nav-link">Features</a>
+                <a href="#how-it-works" class="nav-link">How It Works</a>
+                <a href="#privacy" class="nav-link">Privacy</a>
+                <a href="#contact" class="nav-link">Contact</a>
+                <a href="#" class="btn-demo" onclick="startWorkflow()">Start Demo</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Landing Page Content -->
+    <div id="landing-page">
+        <!-- Hero Section -->
+        <section class="hero">
+            <div class="container">
+                <h1>Your Global Health Data Vault</h1>
+                <p>Tired of scattered medical records across different doctors, countries, and systems? Consolidate decades of health data into one secure place you control. No more lost files, no more starting from scratch with each new doctor.</p>
+                <div class="hero-buttons">
+                    <a href="#how-it-works" class="btn btn-secondary">1. How It Works</a>
+                    <a href="#" class="btn" onclick="startWorkflow()">2. Set Up Your Vault</a>
+                    <a href="#contact" class="btn btn-secondary" onclick="requestCall()">3. Request a Call</a>
+                    <a href="#privacy" class="btn btn-secondary">4. Privacy & Terms</a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="features" id="features">
+            <div class="container">
+                <h2>Why Choose Sante Certa?</h2>
+                <p class="features-subtitle">Healthcare systems weren't designed for people who move, travel, or want second opinions. We fix that fragmentation while keeping your data truly private.</p>
+                
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <span class="feature-icon">🔐</span>
+                        <h3 class="feature-title">Zero-Knowledge Encryption</h3>
+                        <p class="feature-description">We cannot see your data. Even if compelled by courts, your health information remains encrypted with keys only you control.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🇫🇷</span>
+                        <h3 class="feature-title">Flexible Global Hosting</h3>
+                        <p class="feature-description">France by default (strong privacy laws), but many clients prefer US, EU, or bespoke solutions. We offer what works best for your situation - no judgment on your choice.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🌍</span>
+                        <h3 class="feature-title">Connect to 50,000+ Health Systems</h3>
+                        <p class="feature-description">Think of it like logging into your bank account, but for health records. We connect to Epic, Cerner, NHS Digital, Mon Espace Santé, and more - no more calling offices for your files or dealing with fragmented US healthcare systems.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">🤖</span>
+                        <h3 class="feature-title">Honest AI Organization</h3>
+                        <p class="feature-description">Smart categorization using global health standards. When we're uncertain about something, we'll tell you instead of guessing. Search decades of records instantly, in multiple languages.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">👨‍⚕️</span>
+                        <h3 class="feature-title">Secure Physician Access</h3>
+                        <p class="feature-description">Grant temporary, audited access to doctors worldwide. Perfect for medical tourism or second opinions.</p>
+                    </div>
+                    
+                    <div class="feature-card">
+                        <span class="feature-icon">⚖️</span>
+                        <h3 class="feature-title">Legal Compliance</h3>
+                        <p class="feature-description">GDPR native, EU AI Act compliant, HIPAA compatible. Built for the highest privacy standards globally.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- How It Works -->
+        <section class="how-it-works" id="how-it-works">
+            <div class="container">
+                <h2>How It Works</h2>
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <button class="back-button" onclick="backToLanding()">← Back to Home</button>
+                </div>
+                <div class="steps-grid">
+                    <div class="step-card">
+                        <div class="step-number">1</div>
+                        <h3 class="step-title">Choose Your Hosting</h3>
+                        <p class="step-description">France by default (leading in digital rights), but US, EU, or hybrid options available. You decide, we comply.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">2</div>
+                        <h3 class="step-title">Connect Everything</h3>
+                        <p class="step-description">Upload files, plus automatically connect to 50,000+ systems (Epic, Cerner, NHS, etc.) - like online banking but for health records. No more chasing down scattered files.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">3</div>
+                        <h3 class="step-title">Smart Organization</h3>
+                        <p class="step-description">AI categorizes your data using global health standards. When we're unsure about something, we ask instead of guessing - creating your searchable health timeline.</p>
+                    </div>
+                    
+                    <div class="step-card">
+                        <div class="step-number">4</div>
+                        <h3 class="step-title">Controlled Access</h3>
+                        <p class="step-description">Share with doctors, export for AI analysis, or keep private. Granular permissions, full audit trail.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Privacy First -->
+        <section class="privacy-first" id="privacy">
+            <div class="container">
+                <h2>Your Choice, Your Control</h2>
+                <p style="font-size: 18px; margin-bottom: 40px; opacity: 0.9;">We believe in giving you real options. Whether you prefer France's strong privacy framework, US convenience, EU standards, or a custom solution - we support your choice.</p>
+                
+                <div class="privacy-badges">
+                    <div class="privacy-badge">
+                        <h4>🇪🇺 GDPR Ready</h4>
+                        <p>When you want it</p>
+                    </div>
+                    <div class="privacy-badge">
+                        <h4>🇺🇸 HIPAA Compatible</h4>
+                        <p>US-focused option</p>
+                    </div>
+                    <div class="privacy-badge">
+                        <h4>🔒 Zero Knowledge</h4>
+                        <p>Regardless of location</p>
+                    </div>
+                    <div class="privacy-badge">
+                        <h4>⚙️ Bespoke Solutions</h4>
+                        <p>Custom to your needs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA Section -->
+        <section class="cta-section">
+            <div class="container">
+                <h2 style="font-size: 36px; margin-bottom: 20px; color: #2c3e50;">Ready to Own Your Health Data?</h2>
+                <p style="font-size: 18px; color: #7f8c8d; margin-bottom: 40px;">Join forward-thinking families who refuse to let tech giants control their most sensitive information.</p>
+                <a href="#" class="btn" onclick="startWorkflow()" style="font-size: 20px; padding: 20px 40px;">Start Your Private Vault</a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer" id="contact">
+            <div class="container">
+                <div class="footer-content">
+                    <div class="footer-section">
+                        <h3>🏥 Sante Certa</h3>
+                        <p style="color: #bdc3c7; line-height: 1.6;">Your global health data vault. Private by design, sovereign by choice.</p>
+                        <p style="color: #95a5a6; margin-top: 20px;">📍 Built in France<br>🛡️ Global hosting options</p>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Legal</h3>
+                        <a href="#" onclick="showPolicy('privacy')">Privacy Policy</a>
+                        <a href="#" onclick="showPolicy('terms')">Terms of Service</a>
+                        <a href="#" onclick="showPolicy('gdpr')">GDPR Compliance</a>
+                        <a href="#" onclick="showPolicy('security')">Security Standards</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Support</h3>
+                        <a href="mailto:hello@sante-certa.com">hello@sante-certa.com</a>
+                        <a href="#" onclick="showPolicy('docs')">Documentation</a>
+                        <a href="#" onclick="showPolicy('api')">API Reference</a>
+                        <a href="#" onclick="showPolicy('status')">System Status</a>
+                    </div>
+                    
+                    <div class="footer-section">
+                        <h3>Company</h3>
+                        <a href="#" onclick="showPolicy('about')">About Us</a>
+                        <a href="#" onclick="showPolicy('mission')">Our Mission</a>
+                        <a href="#" onclick="showPolicy('careers')">Careers</a>
+                        <a href="#" onclick="showPolicy('press')">Press Kit</a>
+                    </div>
+                </div>
+                
+                <div class="footer-bottom">
+                    <p>&copy; 2025 Sante Certa SAS. All rights reserved. | Built with 💚 in France</p>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <!-- Workflow Demo (Hidden by default) -->
+    <div id="workflow-demo" class="workflow-container">
+        <div class="container">
+            <!-- Workflow Navigation -->
+            <div class="workflow-nav">
+                <div class="logo">🏥 Sante Certa Setup</div>
+                <div class="workflow-steps">
+                    <div class="workflow-step active" data-step="1">1. Sovereignty</div>
+                    <div class="workflow-step" data-step="2">2. Import</div>
+                    <div class="workflow-step" data-step="3">3. Organize</div>
+                    <div class="workflow-step" data-step="4">4. Access</div>
+                </div>
+                <button class="back-button" onclick="handleBackButton()">← Back</button>
+            </div>
+
+            <!-- Step 1: Data Sovereignty -->
+            <div class="step-container active" id="step-1">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">Choose What Works for You</h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">We offer several hosting options. Many clients prefer different solutions based on their needs.</p>
+                </div>
+
+                <div class="choice-grid">
+                    <div class="choice-card" data-choice="ovh">
+                        <span class="card-icon">🇫🇷</span>
+                        <h3 class="card-title">France (Our Default)</h3>
+                        <p class="card-description">Strong privacy framework, OVH Cloud hosting. Good choice if you value European data protection standards.</p>
+                    </div>
+                    <div class="choice-card" data-choice="us">
+                        <span class="card-icon">🇺🇸</span>
+                        <h3 class="card-title">United States (Popular Choice)</h3>
+                        <p class="card-description">HIPAA compliant, faster US provider connections. Many clients prefer this for convenience and familiarity.</p>
+                    </div>
+                    <div class="choice-card" data-choice="eu">
+                        <span class="card-icon">🇪🇺</span>
+                        <h3 class="card-title">EU Multi-Cloud</h3>
+                        <p class="card-description">Distributed across multiple EU providers. GDPR compliant with geographic redundancy options.</p>
+                    </div>
+                    <div class="choice-card" data-choice="bespoke">
+                        <span class="card-icon">⚙️</span>
+                        <h3 class="card-title">Custom Solution</h3>
+                        <p class="card-description">Tailored to your specific requirements. Popular with families who have complex international needs.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="btn" onclick="nextStep()">Continue Setup →</button>
+                </div>
+            </div>
+
+            <!-- US AWS Vault Setup -->
+            <div class="step-container" id="aws-setup" style="display: none;">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">🇺🇸 Setting Up Your Secure AWS Vault</h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">Creating a HIPAA-compliant, enterprise-grade vault using AWS infrastructure</p>
+                </div>
+
+                <div style="background: #f8fcf4; border: 2px solid #a7bc8f; border-radius: 15px; padding: 30px; margin-bottom: 30px;">
+                    <h3 style="color: #446547; margin-bottom: 15px;">🔐 Your Security Architecture</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 20px;">
+                        <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #a7bc8f;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">🗝️ AWS KMS Encryption</h4>
+                            <p style="font-size: 14px; color: #7f8c8d;">Your data encrypted with your own Customer Managed Keys (CMK). You control the keys, we never see your data.</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #a7bc8f;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">🏥 HIPAA Compliance</h4>
+                            <p style="font-size: 14px; color: #7f8c8d;">AWS Business Associate Agreement (BAA), dedicated S3 buckets with versioning and access logging.</p>
+                        </div>
+                        <div style="background: white; padding: 20px; border-radius: 10px; border-left: 4px solid #a7bc8f;">
+                            <h4 style="color: #2c3e50; margin-bottom: 10px;">🔍 Complete Audit Trail</h4>
+                            <p style="font-size: 14px; color: #7f8c8d;">AWS CloudTrail logs every access. You can see who accessed what, when, and from where.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 1px solid #e8f2a7;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">Step 1: Account Setup & Multi-Factor Authentication</h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Your AWS Account Email</label>
+                        <input type="email" id="aws-email" placeholder="your.email@domain.com" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                        <small style="color: #7f8c8d;">We'll guide you through creating dedicated AWS resources under your control</small>
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Choose Your MFA Method</label>
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                            <div class="mfa-option" data-mfa="authenticator" style="padding: 15px; border: 2px solid #e8f2a7; border-radius: 8px; cursor: pointer; text-align: center;">
+                                <span style="font-size: 24px;">📱</span><br>
+                                <strong>Authenticator App</strong><br>
+                                <small>Google Auth, Authy, etc.</small>
+                            </div>
+                            <div class="mfa-option" data-mfa="yubikey" style="padding: 15px; border: 2px solid #e8f2a7; border-radius: 8px; cursor: pointer; text-align: center;">
+                                <span style="font-size: 24px;">🔑</span><br>
+                                <strong>Hardware Key</strong><br>
+                                <small>YubiKey, etc.</small>
+                            </div>
+                            <div class="mfa-option" data-mfa="sms" style="padding: 15px; border: 2px solid #e8f2a7; border-radius: 8px; cursor: pointer; text-align: center;">
+                                <span style="font-size: 24px;">💬</span><br>
+                                <strong>SMS Backup</strong><br>
+                                <small>Less secure option</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #856404; margin-bottom: 10px;">🛡️ This Is YOUR Vault</h4>
+                        <p style="color: #856404; margin: 0;">You own the AWS account, encryption keys, and all data. Sante Certa provides the secure application layer but cannot access your vault without your explicit permission. Even if compelled by law enforcement, your data remains encrypted with keys only you control.</p>
+                    </div>
+
+                    <button class="btn" onclick="proceedToAWSSetup()" style="width: 100%; margin-top: 20px;">Continue to AWS Integration →</button>
+                </div>
+            </div>
+
+            <!-- Step 2: Enhanced Data Import -->
+            <div class="step-container" id="step-2">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">🔐 Access Your Vault</h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">Log in to your secure vault to begin importing your health data</p>
+                </div>
+
+                <!-- Vault Login -->
+                <div style="background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 1px solid #e8f2a7; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px; text-align: center;">🏥 Vault Login</h3>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Email</label>
+                        <input type="email" placeholder="your.email@domain.com" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                    </div>
+
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Password</label>
+                        <input type="password" placeholder="••••••••" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">MFA Code</label>
+                        <input type="text" placeholder="123456" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px; text-align: center; letter-spacing: 3px;">
+                        <small style="color: #7f8c8d;">Enter code from your authenticator app</small>
+                    </div>
+
+                    <button class="btn" onclick="showDataSources()" style="width: 100%;">🔓 Access My Vault</button>
+                </div>
+            </div>
+
+            <!-- Data Sources Selection -->
+            <div class="step-container" id="data-sources" style="display: none;">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">📂 Import Your Health Data</h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">Choose how you'd like to add your health records to your vault</p>
+                </div>
+
+                <div class="choice-grid">
+                    <div class="choice-card" data-source="fastenhealth" onclick="selectDataSource('fastenhealth')">
+                        <span class="card-icon">🌐</span>
+                        <h3 class="card-title">Connect US Health Records</h3>
+                        <p class="card-description">Access 50,000+ US health systems via FastenHealth API. Connect Epic, Cerner, Kaiser Permanente, and more - like online banking but for medical records.</p>
+                    </div>
+
+                    <div class="choice-card" data-source="upload-scan" onclick="selectDataSource('upload-scan')">
+                        <span class="card-icon">📄</span>
+                        <h3 class="card-title">Upload Document Scans</h3>
+                        <p class="card-description">Upload PDFs, images of lab results, discharge summaries, prescription records, insurance cards, and other medical documents.</p>
+                    </div>
+
+                    <div class="choice-card" data-source="upload-images" onclick="selectDataSource('upload-images')">
+                        <span class="card-icon">📸</span>
+                        <h3 class="card-title">Upload Medical Images</h3>
+                        <p class="card-description">X-rays, MRIs, CT scans, photos of wounds/conditions, or send physical images to us for professional digitization.</p>
+                    </div>
+
+                    <div class="choice-card" data-source="manual-notes" onclick="selectDataSource('manual-notes')">
+                        <span class="card-icon">✍️</span>
+                        <h3 class="card-title">Add Notes & Comments</h3>
+                        <p class="card-description">Record symptoms, track medications, add visit notes, family medical history, or any observations about your health.</p>
+                    </div>
+
+                    <div class="choice-card" data-source="international" onclick="selectDataSource('international')">
+                        <span class="card-icon">🌍</span>
+                        <h3 class="card-title">International Records</h3>
+                        <p class="card-description">Connect to NHS Digital (UK), Mon Espace Santé (France), or upload records from other countries. We help with translations.</p>
+                    </div>
+
+                    <div class="choice-card" data-source="wearable" onclick="selectDataSource('wearable')">
+                        <span class="card-icon">⌚</span>
+                        <h3 class="card-title">Wearable Device Data</h3>
+                        <p class="card-description">Import data from Apple Health, Google Fit, Fitbit, continuous glucose monitors, and other health tracking devices.</p>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: 40px;">
+                    <p style="color: #7f8c8d; margin-bottom: 20px;">You can use multiple import methods. Start with one and add others later.</p>
+                    <button class="btn" onclick="nextStep()">Continue to Organization →</button>
+                </div>
+            </div>
+
+            <!-- FastenHealth API Connection -->
+            <div class="step-container" id="fastenhealth-connect" style="display: none;">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">🌐 Connect Your US Health Records</h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">Search and connect to your healthcare providers via FastenHealth API</p>
+                </div>
+
+                <div style="background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 1px solid #e8f2a7;">
+                    <h3 style="color: #2c3e50; margin-bottom: 20px;">🔍 Find Your Healthcare Providers</h3>
+                    
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Search by Provider Name or Location</label>
+                        <input type="text" placeholder="e.g., 'Kaiser Permanente', 'Johns Hopkins', or 'New York, NY'" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                        <button class="btn" style="margin-top: 10px;">Search Providers</button>
+                    </div>
+
+                    <div style="background: #f8fcf4; border-radius: 10px; padding: 20px; margin: 20px 0;">
+                        <h4 style="color: #446547; margin-bottom: 15px;">Found Providers (Demo Results):</h4>
+                        <div style="display: grid; gap: 15px;">
+                            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #a7bc8f; cursor: pointer;" onclick="connectProvider('kaiser')">
+                                <strong>Kaiser Permanente Northern California</strong><br>
+                                <small style="color: #7f8c8d;">Epic EHR • 4.2M patients • Real-time sync available</small>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #a7bc8f; cursor: pointer;" onclick="connectProvider('johns-hopkins')">
+                                <strong>Johns Hopkins Medicine</strong><br>
+                                <small style="color: #7f8c8d;">Epic EHR • Research hospital • Lab results & imaging</small>
+                            </div>
+                            <div style="background: white; padding: 15px; border-radius: 8px; border-left: 4px solid #a7bc8f; cursor: pointer;" onclick="connectProvider('mount-sinai')">
+                                <strong>Mount Sinai Health System</strong><br>
+                                <small style="color: #7f8c8d;">Epic EHR • NYC metro • Specialist records available</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div style="background: #fff3cd; border: 1px solid #ffeaa7; border-radius: 8px; padding: 15px;">
+                        <h4 style="color: #856404; margin-bottom: 8px;">🔐 How This Works</h4>
+                        <p style="color: #856404; margin: 0; font-size: 14px;">You'll log in using your existing patient portal credentials. We use the same secure OAuth 2.0 process as your bank's bill pay feature. Your login credentials are never stored - only secure access tokens.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Provider Connection Flow -->
+            <div class="step-container" id="provider-connect" style="display: none;">
+                <div style="text-align: center; margin-bottom: 40px;">
+                    <h1 style="font-size: 32px; color: #2c3e50; margin-bottom: 10px;">🏥 Connect to <span id="provider-name">Kaiser Permanente</span></h1>
+                    <p style="font-size: 18px; color: #7f8c8d;">Log in with your patient portal credentials</p>
+                </div>
+
+                <div style="background: white; border-radius: 15px; padding: 30px; margin-bottom: 30px; border: 1px solid #e8f2a7; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    <div style="text-align: center; margin-bottom: 25px;">
+                        <div style="width: 64px; height: 64px; background: #446547; border-radius: 12px; margin: 0 auto 15px; display: flex; align-items: center; justify-content: center; color: white; font-size: 24px;">🏥</div>
+                        <p style="color: #7f8c8d; margin: 0;">Secure connection via FastenHealth</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 20px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Patient Portal Username</label>
+                        <input type="text" placeholder="your.username" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                    </div>
+
+                    <div style="margin-bottom: 25px;">
+                        <label style="display: block; margin-bottom: 8px; font-weight: 600; color: #446547;">Password</label>
+                        <input type="password" placeholder="••••••••" style="width: 100%; padding: 12px; border: 2px solid #e8f2a7; border-radius: 8px; font-size: 16px;">
+                    </div>
+
+                    <button class="btn" onclick="simulateProviderConnection()" style="width: 100%; margin-bottom: 15px;">🔐 Connect Securely</button>
+                    
+                    <div style="text-align: center;">
+                        <small style="color: #7f8c8d;">🛡️ Your credentials are encrypted and never stored</small>
+                    </div>
+                </div>
+            </div>
+
+            <div class="step-container" id="step-3">
+                <div style="text-align: center; padding: 60px;">
+                    <h2>Step 3: AI Organization</h2>
+                    <p style="color: #7f8c8d; margin: 20px 0;">This would show the intelligent categorization process...</p>
+                    <button class="btn" onclick="nextStep()">Continue →</button>
+                </div>
+            </div>
+
+            <div class="step-container" id="step-4">
+                <div style="text-align: center; padding: 60px;">
+                    <h2>Step 4: Access Control</h2>
+                    <p style="color: #7f8c8d; margin: 20px 0;">This would show the sharing and export options...</p>
+                    <button class="btn" onclick="backToLanding()">Complete Setup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentStep = 1;
+
+        function startWorkflow() {
+            document.getElementById('landing-page').style.display = 'none';
+            document.getElementById('workflow-demo').classList.add('active');
+            document.body.style.paddingTop = '0';
+        }
+
+        function requestCall() {
+            // Simple contact form simulation
+            const email = prompt("Please enter your email for a consultation call:");
+            if (email && email.includes('@')) {
+                alert(`Thank you! We'll contact you at ${email} within 24 hours to schedule your consultation.`);
+            } else if (email) {
+                alert("Please enter a valid email address.");
+            }
+        }
+
+        function backToLanding() {
+            document.getElementById('landing-page').style.display = 'block';
+            document.getElementById('workflow-demo').classList.remove('active');
+            document.body.style.paddingTop = '80px';
+            currentStep = 1;
+            updateWorkflowStep();
+        }
+
+        function nextStep() {
+            if (currentStep < 4) {
+                currentStep++;
+                updateWorkflowStep();
+            }
+        }
+
+        function updateWorkflowStep() {
+            // Hide all steps
+            document.querySelectorAll('.step-container').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.querySelectorAll('.workflow-step').forEach(step => {
+                step.classList.remove('active');
+            });
+
+            // Show current step
+            document.getElementById(`step-${currentStep}`).classList.add('active');
+            document.querySelector(`.workflow-step[data-step="${currentStep}"]`).classList.add('active');
+        }
+
+        function handleBackButton() {
             // Check if we're in provider connection
             if (document.getElementById('provider-connect').style.display === 'block') {
                 // Go back to FastenHealth search
@@ -40,3 +1077,228 @@ function handleBackButton() {
             // Default: go back to landing page
             backToLanding();
         }
+
+        function showAWSSetup() {
+            // Hide current step and show AWS setup
+            document.querySelectorAll('.step-container').forEach(step => {
+                step.classList.remove('active');
+            });
+            document.getElementById('aws-setup').style.display = 'block';
+            document.getElementById('aws-setup').classList.add('active');
+        }
+
+        function proceedToAWSSetup() {
+            const email = document.getElementById('aws-email').value;
+            const selectedMFA = document.querySelector('.mfa-option[style*="border-color: rgb(167, 188, 143)"]');
+            
+            if (!email || !email.includes('@')) {
+                alert('Please enter a valid email address');
+                return;
+            }
+            
+            if (!selectedMFA) {
+                alert('Please select an MFA method');
+                return;
+            }
+
+            // Simulate AWS integration
+            alert(`🚀 Initiating AWS Setup...\n\n` +
+                  `✅ Creating secure S3 bucket with encryption\n` +
+                  `✅ Setting up AWS Cognito user pool\n` +
+                  `✅ Configuring KMS customer-managed keys\n` +
+                  `✅ Enabling CloudTrail auditing\n` +
+                  `✅ Establishing HIPAA-compliant environment\n\n` +
+                  `You'll receive an email at ${email} with your AWS setup instructions.`);
+            
+            // Move to data import
+            currentStep = 2;
+            updateWorkflowStep();
+        }
+
+        function showDataSources() {
+            // Hide vault login and show data sources
+            document.getElementById('step-2').classList.remove('active');
+            document.getElementById('data-sources').style.display = 'block';
+            document.getElementById('data-sources').classList.add('active');
+        }
+
+        function selectDataSource(source) {
+            if (source === 'fastenhealth') {
+                // Show FastenHealth connection interface
+                document.getElementById('data-sources').style.display = 'none';
+                document.getElementById('fastenhealth-connect').style.display = 'block';
+                document.getElementById('fastenhealth-connect').classList.add('active');
+                return;
+            }
+            
+            const sourceDetails = {
+                'upload-scan': {
+                    title: '📄 Upload Document Scans',
+                    detail: 'Supported formats:\n\n' +
+                           '• PDF documents (any size)\n' +
+                           '• JPG/PNG images\n' +
+                           '• Multi-page documents\n' +
+                           '• OCR text extraction\n' +
+                           '• Automatic categorization\n\n' +
+                           'Drag and drop files or browse to upload.'
+                },
+                'upload-images': {
+                    title: '📸 Medical Images & Scans',
+                    detail: 'Image processing capabilities:\n\n' +
+                           '• DICOM medical imaging files\n' +
+                           '• X-rays, MRIs, CT scans\n' +
+                           '• Photos of conditions/wounds\n' +
+                           '• Professional digitization service\n' +
+                           '• AI-assisted image analysis\n\n' +
+                           'Send physical films to our secure facility for digitization.'
+                },
+                'manual-notes': {
+                    title: '✍️ Add Notes & Comments',
+                    detail: 'Manual entry options:\n\n' +
+                           '• Symptom tracking\n' +
+                           '• Medication logs\n' +
+                           '• Visit summaries\n' +
+                           '• Family medical history\n' +
+                           '• Personal observations\n\n' +
+                           'Rich text editor with medical terminology support.'
+                },
+                'international': {
+                    title: '🌍 International Records',
+                    detail: 'Global health system connections:\n\n' +
+                           '• NHS Digital (UK)\n' +
+                           '• Mon Espace Santé (France)\n' +
+                           '• HealthLink (Australia)\n' +
+                           '• Document translation services\n' +
+                           '• International standard mapping\n\n' +
+                           'We handle the complexity of different health systems.'
+                },
+                'wearable': {
+                    title: '⌚ Wearable Device Data',
+                    detail: 'Device integrations:\n\n' +
+                           '• Apple Health\n' +
+                           '• Google Fit\n' +
+                           '• Fitbit\n' +
+                           '• Continuous Glucose Monitors\n' +
+                           '• Sleep tracking devices\n\n' +
+                           'Automated sync with privacy-preserving connections.'
+                }
+            };
+
+            const info = sourceDetails[source];
+            if (info && confirm(`${info.title}\n\n${info.detail}\n\nWould you like to set up this data source?`)) {
+                alert(`Setting up ${info.title}...\n\nYou'll be guided through the connection process.`);
+            }
+        }
+
+        function connectProvider(providerId) {
+            const providers = {
+                'kaiser': 'Kaiser Permanente Northern California',
+                'johns-hopkins': 'Johns Hopkins Medicine',
+                'mount-sinai': 'Mount Sinai Health System'
+            };
+            
+            document.getElementById('provider-name').textContent = providers[providerId];
+            document.getElementById('fastenhealth-connect').style.display = 'none';
+            document.getElementById('fastenhealth-connect').classList.remove('active');
+            document.getElementById('provider-connect').style.display = 'block';
+            document.getElementById('provider-connect').classList.add('active');
+        }
+
+        function simulateProviderConnection() {
+            const username = document.querySelector('#provider-connect input[type="text"]').value;
+            
+            if (!username) {
+                alert('Please enter your username');
+                return;
+            }
+            
+            // Simulate connection process
+            const providerName = document.getElementById('provider-name').textContent;
+            alert(`🔄 Connecting to ${providerName}...\n\n` +
+                  `✅ Authenticating with patient portal\n` +
+                  `✅ Retrieving available records\n` +
+                  `✅ Found 47 records spanning 8 years\n` +
+                  `✅ Syncing to your secure vault\n\n` +
+                  `Connection successful! Your records are being imported.`);
+            
+            // Go back to data sources
+            document.getElementById('provider-connect').style.display = 'none';
+            document.getElementById('provider-connect').classList.remove('active');
+            document.getElementById('data-sources').style.display = 'block';
+            document.getElementById('data-sources').classList.add('active');
+        }
+
+        // Handle choice card selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.choice-card[data-choice]')) {
+                document.querySelectorAll('.choice-card[data-choice]').forEach(c => c.classList.remove('selected'));
+                e.target.closest('.choice-card[data-choice]').classList.add('selected');
+                
+                // If US is selected, show AWS setup option
+                if (e.target.closest('.choice-card[data-choice="us"]')) {
+                    setTimeout(() => {
+                        if (confirm('Would you like to set up your secure AWS vault now? This will walk you through creating a HIPAA-compliant, enterprise-grade health data vault.')) {
+                            showAWSSetup();
+                        }
+                    }, 500);
+                }
+            }
+        });
+
+        // Handle MFA option selection
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.mfa-option')) {
+                document.querySelectorAll('.mfa-option').forEach(option => {
+                    option.style.borderColor = '#e8f2a7';
+                    option.style.background = 'white';
+                });
+                const selected = e.target.closest('.mfa-option');
+                selected.style.borderColor = '#a7bc8f';
+                selected.style.background = '#f8fcf4';
+            }
+        });
+
+        // Handle workflow step clicks
+        document.addEventListener('click', function(e) {
+            if (e.target.closest('.workflow-step[data-step]')) {
+                const targetStep = parseInt(e.target.closest('.workflow-step[data-step]').dataset.step);
+                currentStep = targetStep;
+                updateWorkflowStep();
+            }
+        });
+
+        function showPolicy(type) {
+            const policies = {
+                privacy: 'Privacy Policy: We implement zero-knowledge encryption ensuring even Sante Certa cannot access your health data...',
+                terms: 'Terms of Service: By using Sante Certa, you retain full ownership of your health data...',
+                gdpr: 'GDPR Compliance: Built in France with privacy-by-design principles...',
+                security: 'Security Standards: AES-256 encryption, SOC2 Type II compliance...',
+                docs: 'Documentation: Complete API and user guides coming soon...',
+                api: 'API Reference: RESTful API for secure data access...',
+                status: 'System Status: All systems operational...',
+                about: 'About: Founded in France to give individuals control over their health data...',
+                mission: 'Mission: Enable global health data sovereignty without compromising privacy...',
+                careers: 'Careers: Join our mission - positions in Paris and remote...',
+                press: 'Press Kit: Logos, background information, and media contacts...'
+            };
+            
+            alert(policies[type] || 'Information coming soon...');
+        }
+
+        // Smooth scrolling for anchor links
+        document.addEventListener('click', function(e) {
+            if (e.target.matches('a[href^="#"]')) {
+                e.preventDefault();
+                const targetId = e.target.getAttribute('href').substring(1);
+                const targetElement = document.getElementById(targetId);
+                if (targetElement) {
+                    targetElement.scrollIntoView({ behavior: 'smooth' });
+                }
+            }
+        });
+
+        // Initial setup
+        document.body.style.paddingTop = '80px';
+    </script>
+</body>
+</html>
