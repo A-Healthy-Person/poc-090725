@@ -1056,6 +1056,16 @@
                 return;
             }
             
+            // Check if we're in AWS purchase screen
+            if (document.getElementById('aws-purchase').style.display === 'block') {
+                // Go back to AWS setup
+                document.getElementById('aws-purchase').style.display = 'none';
+                document.getElementById('aws-purchase').classList.remove('active');
+                document.getElementById('aws-setup').style.display = 'block';
+                document.getElementById('aws-setup').classList.add('active');
+                return;
+            }
+            
             // Check if we're in AWS setup
             if (document.getElementById('aws-setup').style.display === 'block') {
                 // Go back to sovereignty selection
@@ -1071,6 +1081,13 @@
                 document.getElementById('data-sources').style.display = 'none';
                 document.getElementById('data-sources').classList.remove('active');
                 document.getElementById('step-2').classList.add('active');
+                return;
+            }
+            
+            // Check if we're in standard workflow steps
+            if (currentStep > 1) {
+                currentStep--;
+                updateWorkflowStep();
                 return;
             }
             
